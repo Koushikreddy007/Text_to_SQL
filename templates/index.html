@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to SQL</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 50px;
+        }
+
+        .container {
+            max-width: 800px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-table {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Text to SQL:</h1>
+        <form method="POST">
+            <div class="mb-3">
+                <label for="question" class="form-label">Input your question:</label>
+                <input type="text" class="form-control" id="question" name="question" value="{{ question }}" required
+                    placeholder="e.g., How many students are in Data Science class?">
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Ask the question</button>
+        </form>
+
+        {% if result is not none %}
+        <div class="mt-4">
+            <h3>SQL Query Result:</h3>
+            <div class="table-responsive result-table">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Result Row</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in result %}
+                        <tr>
+                            <td>{{ row }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
